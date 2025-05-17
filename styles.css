@@ -1,0 +1,139 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #a8edea, #fed6e3, #d4fc79, #96e6a1);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    overflow-x: hidden;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .countdown {
+        font-size: 20px;
+    }
+    .message {
+        font-size: 14px;
+        padding: 15px;
+    }
+    .day-buttons button {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+    .countdown {
+        font-size: 18px;
+    }
+    .message {
+        font-size: 12px;
+        padding: 10px;
+    }
+    .day-buttons button {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}
+h1 {
+    color: #e06c75;
+    animation: pop 1s ease-in-out;
+}
+.countdown {
+    font-size: 24px;
+    margin: 20px 0;
+    animation: fadein 2s ease-in;
+}
+.message {
+    margin: 30px auto;
+    background: #ffcccc;
+    color: #b23a48; /* Softer red for better readability */
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    min-height: 100px;
+    animation: fadein 1.5s ease-in;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fab1a0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+button:hover {
+    background-color: #ff7675;
+}
+.audio-control {
+    margin-top: 20px;
+}
+.hidden {
+    display: none;
+}
+.intro {
+    animation: fadein 1.5s ease-in;
+}
+.day-buttons {
+    margin-top: 20px;
+}
+.day-buttons button {
+    padding: 16px 24px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: none;
+    background-color: #f9a825;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.day-buttons button.active {
+    background-color: #fdcb6e;
+    font-weight: bold;
+}
+.day-buttons button.active {
+  background-color: #ffc107;
+  color: black;
+  font-weight: bold;
+}
+.day-buttons button:hover {
+    transform: scale(1.05);
+    background-color: #f57f17;
+}
+.day-buttons button:disabled {
+  background-color: #e0e0e0;
+  color: #888;
+}
+@keyframes pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+body {
+    animation: gradientShift 10s ease infinite;
+}
