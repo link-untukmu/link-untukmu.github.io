@@ -71,11 +71,10 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: var(--shadow);
-      margin: 5px;
+      margin: 10px;
       font-weight: 600;
-      width: 200px; 
-      max-width: 100%; 
-      flex-shrink: 0;
+      width: 100%;
+      max-width: 300px;
     }
     
     button:hover {
@@ -137,7 +136,6 @@
       justify-content: center;
       gap: 10px;
       margin: 2rem 0;
-      width: 100%;
     }
     
     .message {
@@ -287,13 +285,11 @@
     /* Tablet Styles */
     @media (min-width: 481px) and (max-width: 768px) {
       .day-buttons {
-        /* grid-template-columns: repeat(3, 1fr); */
-        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
       }
       
       button {
         padding: 10px 20px;
-        width: 180px
       }
       
       .message {
@@ -312,14 +308,14 @@
       }
       
       .day-buttons {
-        /*display: grid;
-        grid-template-columns: repeat(2, 1fr);*/
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
       }
       
       button {
-        padding: 10px 16px;
-        margin: 160px;
+        padding: 8px 16px;
+        margin: 5px;
         font-size: 0.9rem;
       }
       
@@ -348,7 +344,7 @@
       }
       
       button {
-        max-width: 220px;
+        max-width: 200px;
       }
     }
   </style>
