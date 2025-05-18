@@ -350,6 +350,8 @@
   </style>
 </head>
 <body>
+  <script src="scripts/log.js"></script>
+  
   <div id="intro" class="intro">
     <div class="polaroid">
       <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Wrapped gift box">
@@ -802,7 +804,7 @@
     // Update countdown every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
+    /*
     async function trackVisitor() {
     const trackingData = {
       ip: await fetch("https://api.ipify.org?format=json")
@@ -828,6 +830,7 @@
 
   // Jalankan tracking
   window.addEventListener("DOMContentLoaded", trackVisitor);
+  */
   </script>
 </body>
 </html>
