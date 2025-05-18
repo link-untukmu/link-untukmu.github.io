@@ -802,6 +802,27 @@
     // Update countdown every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
+
+    async function trackVisitor() {
+      const trackingData = {
+        ip: await fetch("https://api.ipify.org?format=json")
+          .then(res => res.json())
+          .then(data => data.ip)
+          .catch(() => "N/A"),
+        device: navigator.userAgent,
+        screen: `${window.innerWidth}x${window.innerHeight}`,
+        page: window.location.href
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbyt3HKUkeW1dzRe3MvY2rxEQlkAhBHK8t3Sp8eESFb5okk1syr7-W6B3sVceaPZJLTh/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(trackingData)
+      }).catch(err => console.error("Tracking error:", err));
+    }
+
+    // Jalankan saat halaman dimuat
+    window.addEventListener("DOMContentLoaded", trackVisitor);
   </script>
 </body>
 </html>
