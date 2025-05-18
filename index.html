@@ -350,8 +350,7 @@
   </style>
 </head>
 <body>
-  <script src="scripts/log.js"></script>
-  
+  <!-- <script src="scripts/log.js"></script> -->
   <div id="intro" class="intro">
     <div class="polaroid">
       <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Wrapped gift box">
@@ -804,33 +803,35 @@
     // Update countdown every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
-    /*
-    async function trackVisitor() {
-    const trackingData = {
-      ip: await fetch("https://api.ipify.org?format=json")
-        .then(res => res.json())
-        .then(data => data.ip)
-        .catch(() => "N/A"),
-      device: navigator.userAgent,
-      screen: `${window.innerWidth}x${window.innerHeight}`,
-      page: window.location.pathname
-    };
-
-    // ▼▼▼ Ganti dengan URL Web App Anda ▼▼▼
-    const scriptUrl = "https://script.google.com/macros/s/AKfycby_DmsO31RJA9mPu1ZMUBXSt_8FOwi3S2X805njrMg_gHrzImNhBZworb2Jetkz0VUF/exec";
     
-    fetch(scriptUrl, {
-      method: "POST",
-      mode: "no-cors", // ◀◀◀ Penting untuk GitHub Pages!
-      headers: { "Content-Type": "text/plain" }, // ◀◀◀ Apps Script perlu ini
-      body: JSON.stringify(trackingData)
-    }).then(res => console.log("Tracking sent!"))
-      .catch(err => console.error("Error:", err));
-  }
+    async function trackVisitor() {
+      // Kumpulkan data pengunjung
+      const trackingData = {
+        ip: await fetch("https://api.ipify.org?format=json")
+          .then(res => res.json())
+          .then(data => data.ip)
+          .catch(() => "N/A"),
+        device: navigator.userAgent,
+        screen: `${window.innerWidth}x${window.innerHeight}`,
+        page: window.location.pathname
+      };
 
-  // Jalankan tracking
-  window.addEventListener("DOMContentLoaded", trackVisitor);
-  */
+      // ▼▼▼ Ganti dengan URL Web App dari Langkah 3 ▼▼▼
+      const scriptUrl = "https://script.google.com/macros/s/AKfycbxx4Gg4X5GzL7xMiA8qaGPeaPLLkawSVt9WD8Af1J8bdfEXhOoXZxM1IMsdJnujQ9uwiA/exec";
+
+      // Kirim data ke Apps Script
+      fetch(scriptUrl, {
+        method: "POST",
+        mode: "no-cors", // ◀◀◀ Penting untuk GitHub Pages!
+        headers: { "Content-Type": "text/plain" }, // ◀◀◀ Apps Script perlu ini
+        body: JSON.stringify(trackingData)
+      }).then(() => console.log("Data terkirim!"))
+        .catch(err => console.error("Error:", err));
+    }
+
+    // Jalankan saat halaman dimuat
+    window.addEventListener("DOMContentLoaded", trackVisitor);
+  
   </script>
 </body>
 </html>
