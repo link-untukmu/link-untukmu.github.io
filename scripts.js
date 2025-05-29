@@ -1,5 +1,5 @@
 // Set the birthday date (YYYY-MM-DD format)
-const birthday = new Date('2025-05-29T00:00:00+07:00');
+const birthday = new Date('2025-06-07T00:00:00+07:00');
 const today = new Date();
 const countdown = document.getElementById("countdown");
 const messageDiv = document.getElementById("message");
