@@ -34,7 +34,7 @@ const dayContents = [
     },
     {
     message: `<p>Waktu main ludo. Aku asal nyeletuk, yang kalah jadi pacarku...</p>
-                <p>Dan kamu kalah 😳 Tapi jangan-jangan kamu sengaja kalah ya? 😏</p>`,
+                <p>Dan kamu kalah lho wkwkw 😏</p>`,
     image: "day5.webp"
     },
     {
