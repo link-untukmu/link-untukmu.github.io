@@ -115,6 +115,82 @@ button.active {
     z-index: 1;
 }
 
+.message-form-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.message-form-container h4 {
+  color: #ff6b6b;
+  margin-bottom: 1rem;
+}
+
+.message-form-container textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #ffb8b8;
+  border-radius: 10px;
+  font-size: 16px;
+  min-height: 120px;
+  margin-bottom: 1rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.status {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.status.success {
+  background-color: #e6ffed;
+  color: #22863a;
+}
+
+.status.error {
+  background-color: #ffebee;
+  color: #b71c1c;
+}
+
+.gimmick-button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+  margin-top: 10px;
+}
+
+.gimmick-button:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 107, 107, 0.4);
+}
+
+.gimmick-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+}
+
+.gimmick-button.clicked {
+  background-color: #4CAF50;
+  animation: buttonBounce 0.5s;
+}
+
+@keyframes buttonBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
 .countdown {
     font-size: clamp(1.5rem, 5vw, 2rem);
     margin: 2rem 0;

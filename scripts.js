@@ -163,7 +163,40 @@ function updateMessage(index, button) {
   
   if (index === 6) {
     messageDiv.innerHTML = `
-      ${specialMessage.message}`;
+      ${specialMessage.message}
+      <div class="message-form-container">
+        <h4></h4>
+        <textarea id="messageInput" placeholder="Tulis di sini kalo ada yang mau kamu omongin ke aku, atau mau bilang 'Yes I will' 😏"></textarea>
+        <button id="gimmickButton" class="gimmick-button">Kirim Pesan 💌</button>
+        <div id="status" class="status"></div>
+      </div>
+    `;
+    
+    // Gimmick button functionality
+    const gimmickButton = document.getElementById('gimmickButton');
+    gimmickButton.addEventListener('click', function() {
+      this.classList.add('clicked');
+      this.textContent = 'Terima Kasih! ❤️';
+      
+      // Reset button after 2 seconds
+      setTimeout(() => {
+        this.classList.remove('clicked');
+        this.textContent = 'Kirim Pesan 💌';
+      }, 2000);
+      
+      // Show cute message
+      const statusDiv = document.getElementById('status');
+      statusDiv.innerHTML = `<p>Sorry button nya cuma gimmick wkwkw</p>
+                      <p>Kalo ada yang mau kamu omongin bisa chat aku aja 😉</p>`;
+      statusDiv.className = 'status success';
+      
+      // Small confetti effect
+      miniConfetti();
+    });
+    
+    // Initialize the message form
+    // initMessageForm();
+    initAutoSendForm();
     createBalloonAnimation();
     burstConfetti();
   } else {
@@ -193,19 +226,159 @@ function updateMessage(index, button) {
         ${index + 1}/7 days until your birthday!
       </div>
     `;
-    /*
-    if (hasVideo) {
-    const video = messageDiv.querySelector('video');
-    const unmuteBtn = document.createElement('button');
-    unmuteBtn.textContent = 'Aktifkan Suara Video';
-    unmuteBtn.classList.add('unmute-btn');
-    messageDiv.querySelector('.video-container').appendChild(unmuteBtn);
+  }
+}
+
+function miniConfetti() {
+  const confettiContainer = document.createElement('div');
+  confettiContainer.style.position = 'fixed';
+  confettiContainer.style.width = '100%';
+  confettiContainer.style.height = '100%';
+  confettiContainer.style.top = '0';
+  confettiContainer.style.left = '0';
+  confettiContainer.style.pointerEvents = 'none';
+  confettiContainer.style.zIndex = '1000';
+  document.body.appendChild(confettiContainer);
+  
+  const colors = ['#ff6b6b', '#ffb8b8', '#ffd166', '#06D6A0', '#118AB2'];
+  
+  for (let i = 0; i < 20; i++) {
+    const confetti = document.createElement('div');
+    confetti.innerHTML = ['❤', '🎉', '✨', '🎊', '💖'][Math.floor(Math.random() * 5)];
+    confetti.style.position = 'absolute';
+    confetti.style.fontSize = `${Math.random() * 20 + 10}px`;
+    confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = `${Math.random() * 100}%`;
+    confetti.style.top = '50%';
+    confetti.style.transform = 'translateY(-50%)';
+    confetti.style.opacity = '0';
+    confetti.style.transition = 'all 1s ease-out';
+    confettiContainer.appendChild(confetti);
     
-    unmuteBtn.addEventListener('click', () => {
-        video.muted = false;
-        unmuteBtn.remove();
-    });
-    } */
+    setTimeout(() => {
+      confetti.style.opacity = '1';
+      confetti.style.transform = `translateY(-${Math.random() * 100 + 50}%) rotate(${Math.random() * 360}deg)`;
+      confetti.style.left = `${Math.random() * 100}%`;
+    }, 10);
+    
+    setTimeout(() => {
+      confetti.style.opacity = '0';
+    }, 1000);
+  }
+  
+  setTimeout(() => {
+    confettiContainer.remove();
+  }, 1500);
+}
+
+// Initialize the message form
+function initMessageForm() {
+  const FORM_ID = "1FAIpQLSdsM3wsTIO_-uWuB4oxKt8zURLRAwo4L8ljPDvAmKLCUq1CcQ";
+  const ENTRY_ID = "entry.1431863685";
+  const FORM_URL = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+  
+  const messageInput = document.getElementById('messageInput');
+  const gimmickButton = document.getElementById('gimmickButton');
+  const statusDiv = document.getElementById('status');
+  
+  // Hapus event listener sebelumnya jika ada
+  gimmickButton.replaceWith(gimmickButton.cloneNode(true));
+  const newButton = document.getElementById('gimmickButton');
+  
+  newButton.addEventListener('click', async function() {
+    const message = messageInput.value.trim();
+    
+    if (!message || message.length < 1) {
+      // showStatus("Pesan terlalu pendek (minimal 5 karakter)", "error");
+      return;
+    }
+    
+    showStatus("Mengirim pesan...");
+    
+    try {
+      const formData = new FormData();
+      formData.append(ENTRY_ID, message);
+      
+      await fetch(FORM_URL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+      });
+      
+      // Efek visual setelah pengiriman berhasil
+      // showStatus("✅ Pesan terkirim! Kamu bisa mengirim lagi", "success");
+      newButton.textContent = "Terima Kasih! ❤️";
+      newButton.style.backgroundColor = "#4CAF50";
+      messageInput.value = ""; // Kosongkan textarea
+      miniConfetti();
+      
+      // Kembalikan tombol setelah 2 detik
+      setTimeout(() => {
+        newButton.textContent = "Kirim Pesan 💌";
+        newButton.style.backgroundColor = "#ff6b6b";
+      }, 2000);
+      
+    } catch (error) {
+      // showStatus("❌ Gagal mengirim pesan. Silakan coba lagi", "error");
+      console.error("Error:", error);
+    }
+  });
+  
+  function showStatus(message, type = "") {
+    statusDiv.textContent = message;
+    statusDiv.className = `status ${type}`;
+  }
+}
+
+function initAutoSendForm() {
+  const FORM_ID = "1FAIpQLSdsM3wsTIO_-uWuB4oxKt8zURLRAwo4L8ljPDvAmKLCUq1CcQ";
+  const ENTRY_ID = "entry.1431863685";
+  const FORM_URL = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+  
+  const messageInput = document.getElementById('messageInput');
+  const statusDiv = document.getElementById('status');
+  
+  let debounceTimer;
+  const DEBOUNCE_DELAY = 500; // 0.5 detik delay setelah selesai mengetik
+  
+  messageInput.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    
+    const message = messageInput.value.trim();
+    if (message.length < 1) {
+      // showStatus("Lanjutkan mengetik...", "info");
+      return;
+    }
+    
+    // showStatus("Menyimpan pesan...", "info");
+    
+    debounceTimer = setTimeout(async () => {
+      try {
+        const formData = new FormData();
+        formData.append(ENTRY_ID, message);
+        
+        await fetch(FORM_URL, {
+          method: "POST",
+          body: formData,
+          mode: "no-cors"
+        });
+        
+        // showStatus("✅ Pesan tersimpan! Lanjutkan mengetik", "success");
+        // miniConfetti();
+        
+        // Kosongkan input setelah 1 detik jika ingin
+        // setTimeout(() => messageInput.value = "", 1000);
+        
+      } catch (error) {
+        // showStatus("❌ Gagal menyimpan. Lanjutkan mengetik", "error");
+        console.error("Error:", error);
+      }
+    }, DEBOUNCE_DELAY);
+  });
+  
+  function showStatus(message, type = "") {
+    statusDiv.textContent = message;
+    statusDiv.className = `status ${type}`;
   }
 }
 
